@@ -54,8 +54,8 @@ Interface Defaults {
     public function setDefaults();
 }
 
-class CarException extends \Exception{
-    protected $message = 'Car exception';
+class BusDetailsCollectionException extends \Exception{
+    protected $message = 'Car Cannot be constructed, not enough parts';
 }
 
 class EngineException extends \Exception{
@@ -65,29 +65,6 @@ class EngineException extends \Exception{
 /** To create proper car we have to have proper collection, e.g. bus has it own collection, 
 army car it own, etc.
 **/
-abstract class Car{
-
-    protected $carDetailsCollection;
-
-    protected function setCarDetailsCollection(CarDetailsColection $carDetailsCollection){
-        $this->carDetailsCollection = $carDetailsCollection;
-    }
-    
-    protected function getCarDetailsCollection(){
-        return $this->carDetailsCollection;
-    }
-
-    public function createCar(CarDetailsColection $carDetailsCollection) {
-      $this->setCarDetailsCollection($carDetailsCollection);
-      $this->checkCar();   
-    }
-
-    public function checkCar() {
-      return $this->carDetailsCollection->check(); 
-    }
-
-    abstract public function drive();
-}
 
 class BusEngine implements Engine{
 ....
@@ -124,9 +101,33 @@ class BusDetailsCollection implements CarDetailsColection, setDefaults{
 
     public function check() {
         if(!($this->engine && $this->wheels && $this->body)){
-            throw new EngineException();
+            throw new BusDetailsCollectionException();
         }
     }
+}
+
+abstract class Car{
+
+    protected $carDetailsCollection;
+
+    protected function setCarDetailsCollection(CarDetailsColection $carDetailsCollection){
+        $this->carDetailsCollection = $carDetailsCollection;
+    }
+    
+    protected function getCarDetailsCollection(){
+        return $this->carDetailsCollection;
+    }
+
+    public function createCar(CarDetailsColection $carDetailsCollection) {
+      $this->setCarDetailsCollection($carDetailsCollection);
+      $this->checkCar();   
+    }
+
+    public function checkCar() {
+      return $this->carDetailsCollection->check(); 
+    }
+
+    abstract public function drive();
 }
 
 class Bus extends Car{
