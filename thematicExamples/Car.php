@@ -1,5 +1,5 @@
 <?php
-// Code without code style, without check. Just main structure
+// Code without code style, without check, whithout moving to proper folder. Just main structure and idea
 Interface Start {
     public function start();
 }
@@ -89,9 +89,19 @@ abstract class Car{
     abstract public function drive();
 }
 
+class BusEngine implements Engine{
+....
+}
+class EnglishBusBody implements Body{
+....
+}
+class BusWheelsCollection implements WheelsCollection{
+....
+}
+
 class BusDetailsCollection implements CarDetailsColection, setDefaults{
     private $engine;
-    private $wheels;
+    private $wheelsCollection;
     private $body;
 
     public function setEngine(Engine $engine){
@@ -106,9 +116,9 @@ class BusDetailsCollection implements CarDetailsColection, setDefaults{
          $this->body = $body;
     }
 
-    public setDefaults(){
+    public function setDefaults(){
         $this->body = new EnglishBusBody();
-        $this->wheels = new BusWheels();
+        $this->wheelsCollection = new BusWheelsCollection();
         $this->engine = new BusEngine();
     }
 
