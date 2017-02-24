@@ -77,9 +77,9 @@ class BusWheelsCollection implements WheelsCollection{
 }
 
 class BusDetailsCollection implements CarDetailsColection, setDefaults{
-    private $engine;
-    private $wheelsCollection;
-    private $body;
+    private BusEngine $engine;
+    private BusWheelsCollection $wheelsCollection;
+    private EnglishBusBody $body;
 
     public function setEngine(Engine $engine){
         $this->engine = $engine;
