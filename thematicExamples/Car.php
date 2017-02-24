@@ -50,8 +50,8 @@ Interface CarDetailsColection extends Check, Collection{
     public function setBody(Body $body);
 }
 
-/** To create proper car we have to have proer collection, e.g. bus has it oun collection, 
-army car it oun, etc.
+/** To create proper car we have to have proper collection, e.g. bus has it own collection, 
+army car it own, etc.
 **/
 abstract class Car{
 
